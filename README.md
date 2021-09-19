@@ -17,9 +17,8 @@ This app is a Form consiting of:
 This project is about managing the state of Javascript Objects,     
 where we have to retrieve the previous value of the Object.
 
-We already have some experience using [React: Forms](https://github.com/ChristianVillalba/React_forms.git).       
-But when we have too many inputs,       
-We would have too many functions and separate constants,       
+We already have some experience using basic [React: Forms](https://github.com/ChristianVillalba/React_forms.git).       
+But having too many inputs, will produce too many functions and separate constants,       
 even though those pieces of information probably should be associated with each other       
 (eg: in this project, First Name & Last Name should be associated to the same JS Object).
 ```javascript
@@ -28,8 +27,7 @@ const [lName, setLastName] = useState("");
 ```
 
 ### UseState - Objects
-We can use ```useState``` but instead of storing a simple value,      
-we can actually store an Object as well.
+```useState``` can store a simple value or an Object as well.
 eg: 
 
 ```javascript
@@ -41,54 +39,52 @@ const [fullName, setFullName] = useState({
 Now our ```fullName``` is storing a Object,       
 And when we call ```setFullName```, we want to set it to a new Object.
 
-We have to update our code in our return statement:
+We have to update our code in our return statement because      
+```value``` is fetching (the data) ```fName``` and ```lName``` from the JS Object ```fullName```.     
+```name``` it's the name of the HTML Input, It will help us later on to know what Input was triggered. 
+
 ```html
 <h1> Hello, {fullName.fName} {fullName.lName} </h1>
 ...
 <input 
 value={fullName.fName}
 onChange={handleNameChange}
+name="fName"
 ... 
 />
 <input 
 value={fullName.lName}
 onChange={handleNameChange}
+name="lName"
 ... 
 />
 ```
-We are fetching ```fName``` and ```lName``` from the Object ```fullName```.            
-On the ``onChange``, instead of calling two separate methods,        
-I'm going to get it call the same method: ```{handleNameChange}```
+   
+On the ``onChange`` Attribute, instead of calling two separate methods,        
+I'm going to get it call the same method: ```{handleNameChange}``` (it will be a JS funct)      
+So when either of these Inputs are changed,        
+they will call the same function passing over the ```event``` that calls this change:    
 
 ```javascript
 function handleNameChange(event) {
-  const NewValue = event.target.value
+  const newValue = event.target.value;
+  const inputName = event.target.name;
+  
 }
 ```
-So when either of these Inputs are changed,        
-they're going to call the same function passing over the ```event``` that calls this change.         
-And then, inside this function, we're going to get hold of the new value (```newValue```),       
+     
+Inside this function, we're going to get hold of the new value (```newValue```),       
 and I'm gonna set it to ```event.target.value```.
 
-But then I want to somehow be able to get hold of the previous value of the full name (fName & lName),    
+We use ```event.target.name``` to know which Input actually triggered the ```handleNameChange```     
+and store the value on ```inputName```.     
+
+   the funct ```handleNameChange``` gets hold of the previous value ```prevValue``` of the ```fullName``` (JS Obj),    
 so that I can add to it the parts that have been changed.      
-So if one inputs changes, then I only want to update that value independently,     
-The other part should stay as it was.     
+So if one input changes, then I only update that value independently, the other part should stay as it was.     
 
-To know which Input actually triggered the ```handleNameChange```:      
-
-```javascript
-function handleNameChange(event) {
-  const NewValue = event.target.value;
-  const inputName = event.target.name;
-}
-```
-We add to Input ```name=``` ```"fName"``` / ```"lName"```,      
-And we add to the function ```handleNameChange``` a new const ```inputName```     
-The new ```newValue``` also changes our ```inputName```.
-
-But still we can't see changes in our app, 
-
+But still we can't see changes in our app,     
+```value``` is a **controlled components** so their value is set to the ```fullName.``` ```fName```/```lName```
 
 
 <!-- eg: Challange 1
