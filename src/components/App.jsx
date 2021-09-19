@@ -15,6 +15,7 @@ function App() {
   //   setLastName(event.target.value);
   // }
   function handleNameChange(event) {
+    // check OBJECT DESTRUCTURING section on README
     const newValue = event.target.value;
     const inputName = event.target.name;
     setFullName((prevValue) => {
