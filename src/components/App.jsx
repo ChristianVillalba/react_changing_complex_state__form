@@ -18,28 +18,38 @@ function App() {
     const newValue = event.target.value;
     const inputName = event.target.name;
     setFullName((prevValue) => {
-      console.log(prevValue);
+      if (inputName === "fName") {
+        return {
+          fName: newValue,
+          lName: prevValue.lName
+        };
+      } else if (inputName === "lName") {
+        return {
+          fName: prevValue.fName,
+          lName: newValue
+        };
+      }
     });
   }
 
   return (
     <div className="container">
-      <h1>
-        {/* Hello, {fName} {lName}
+      {/* Hello, {fName} {lName}
         Updated to: */}
-        Hello, {fullName.fName} {fullName.lName}
+      <h1>
+        Hello {fullName.fName} {fullName.lName}
       </h1>
       <form>
         <input
           name="fName"
-          // value={fullName.fName}
+          value={fullName.fName}
           type="text"
           onChange={handleNameChange}
           placeholder="First Name"
         />
         <input
           name="lName"
-          // value={fullName.lName}
+          value={fullName.lName}
           type="text"
           onChange={handleNameChange}
           placeholder="Last Name"
