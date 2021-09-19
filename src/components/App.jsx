@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 function App() {
-  // Change
   // const [fName, setFirstName] = useState("");
   // const [lName, setLastName] = useState("");
   const [fullName, setFullName] = useState({
@@ -16,10 +15,11 @@ function App() {
   //   setLastName(event.target.value);
   // }
   function handleNameChange(event) {
-    const NewValue = event.target.value;
+    const newValue = event.target.value;
     const inputName = event.target.name;
-    console.log(NewValue);
-    console.log(inputName);
+    setFullName((prevValue) => {
+      console.log(prevValue);
+    });
   }
 
   return (
@@ -32,14 +32,14 @@ function App() {
       <form>
         <input
           name="fName"
-          value={fullName.fName}
+          // value={fullName.fName}
           type="text"
           onChange={handleNameChange}
           placeholder="First Name"
         />
         <input
           name="lName"
-          value={fullName.lName}
+          // value={fullName.lName}
           type="text"
           onChange={handleNameChange}
           placeholder="Last Name"
